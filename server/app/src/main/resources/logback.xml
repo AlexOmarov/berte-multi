@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+
+<configuration debug="false">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <springProperty name="componentName" source="spring.application.name"/>
+    <springProperty name="LOGSTASH_HOST" source="contour.logstash.host"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <pattern>yyyy-MM-dd' 'HH:mm:ss.SSS</pattern>
+                    <fieldName>timestamp</fieldName>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <pattern>
+                    <omitEmptyFields>false</omitEmptyFields>
+                    <pattern>
+                        {
+                            "level": "%level",
+                            "message": "%message",
+                            "traceId": "%X{traceId}",
+                            "spanId": "%X{spanId}",
+                            "loggerName": "%logger",
+                            "threadName": "%thread",
+                            "componentName": "${componentName}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+    <appender name="STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>${LOGSTASH_HOST:- }</destination>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <pattern>yyyy-MM-dd' 'HH:mm:ss.SSS</pattern>
+                    <fieldName>timestamp</fieldName>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <pattern>
+                    <omitEmptyFields>false</omitEmptyFields>
+                    <pattern>
+                        {
+                        "level": "%level",
+                        "message": "%message",
+                        "traceId": "%X{traceId}",
+                        "spanId": "%X{spanId}",
+                        "loggerName": "%logger",
+                        "threadName": "%thread",
+                        "componentName": "${componentName}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <root>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="STASH"/>
+    </root>
+    <!-- Stop output INFO at start -->
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+</configuration>

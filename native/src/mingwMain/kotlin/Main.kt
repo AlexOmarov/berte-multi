@@ -1,5 +1,5 @@
 fun main() {
-    println("Hello World!")
+    println(Greeting().greet())
     val name = readlnOrNull()
     println("Your name contains ${name?.replace(" ", "")?.length} letters")
 
@@ -7,5 +7,4 @@ fun main() {
         IntArray(5)
     }
     graph[0][0] = 1
-    println(Greeting().greet())
 }
