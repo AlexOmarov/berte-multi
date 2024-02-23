@@ -46,12 +46,17 @@ dependencies {
     detektPlugins(libs.detekt.ktlint)
 
     implementation(projects.shared)
-    implementation(project(":api"))
+    implementation(project(":server:api"))
 
     implementation(libs.logback)
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.netty)
 
+    testImplementation(libs.bundles.test)
     testImplementation(libs.ktor.server.tests)
     testImplementation(libs.kotlin.test.junit)
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
