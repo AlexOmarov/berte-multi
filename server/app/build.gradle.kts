@@ -3,6 +3,11 @@ plugins {
     alias(libs.plugins.ktor)
     alias(libs.plugins.detekt)
     alias(libs.plugins.kover)
+    application
+}
+
+application {
+    mainClass.set("ru.somarov.berte.ApplicationKt")
 }
 
 project.layout.buildDirectory = File("../.build/app")
