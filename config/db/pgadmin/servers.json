@@ -1,0 +1,13 @@
+{
+  "Servers": {
+    "mail-db": {
+      "Name": "Berte service database",
+      "Group": "berte_service",
+      "Port": 5432,
+      "Username": "berte_service",
+      "Host": "db",
+      "SSLMode": "prefer",
+      "MaintenanceDB": "berte_service"
+    }
+  }
+}

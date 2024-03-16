@@ -34,7 +34,6 @@ kotlin {
         val desktopMain by getting
         
         androidMain.dependencies {
-            implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
@@ -50,6 +49,7 @@ kotlin {
             implementation(compose.desktop.currentOs)
         }
     }
+    androidTarget()
 }
 
 android {
@@ -82,7 +82,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     dependencies {
-        debugImplementation(libs.compose.ui.tooling)
+
     }
 }
 

@@ -1,31 +1,65 @@
 plugins {
     alias(libs.plugins.kotlinJvm)
-    alias(libs.plugins.sonarqube)
+    alias(libs.plugins.ktor)
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.kover)
+    application
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
+application {
+    mainClass.set("ru.somarov.berte.ApplicationKt")
+}
+
+project.layout.buildDirectory = File("../.build/server")
+val exclusions = project.properties["test_exclusions"].toString().replace("/", ".")
+
+detekt {
+    config.setFrom(files("$rootDir/detekt-config.yml"))
+    reportsDir = file("${project.layout.buildDirectory.get().asFile.path}/reports/detekt")
+}
+
+kover {
+    useJacoco()
+}
+
+koverReport {
+    filters {
+        excludes {
+            classes(exclusions.split(","))
+        }
+    }
+    defaults {
+        xml {
+            onCheck = true
+        }
+        log {
+            onCheck = true
+        }
+        html {
+            onCheck = true
+        }
+
+        verify {
+            rule {
+                minBound(50)
+            }
+        }
     }
 }
 
-val exclusions = project.properties["test_exclusions"].toString()
+dependencies {
+    detektPlugins(libs.detekt.ktlint)
 
-sonar {
-    properties {
-        property("sonar.qualitygate.wait", "true")
-        property("sonar.core.codeCoveragePlugin", "jacoco")
-        property(
-            "sonar.kotlin.detekt.reportPaths",
-            "${project(":server:app").layout.buildDirectory.get().asFile}/reports/detekt/detekt.xml, " +
-                "${project(":server:api").layout.buildDirectory.get().asFile}/reports/detekt/detekt.xml"
-        )
-        property(
-            "sonar.coverage.jacoco.xmlReportPaths",
-            "${project(":server:app").layout.buildDirectory.get().asFile}/reports/kover/report.xml"
-        )
-        property("sonar.cpd.exclusions", exclusions)
-        property("sonar.jacoco.excludes", exclusions)
-        property("sonar.coverage.exclusions", exclusions)
-    }
+    implementation(projects.shared)
+
+    implementation(libs.bundles.ktor.server)
+
+    implementation(libs.logback)
+
+    testImplementation(libs.bundles.test)
+    testImplementation(libs.ktor.server.tests)
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
