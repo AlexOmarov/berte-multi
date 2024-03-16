@@ -51,15 +51,29 @@ dependencies {
     detektPlugins(libs.detekt.ktlint)
 
     implementation(projects.shared)
-    implementation(project(":server:api"))
+    implementation(projects.server.api)
 
     implementation(libs.logback)
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.netty)
 
+    implementation("io.ktor:ktor-server-websockets-jvm")
+    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm")
+    implementation("io.ktor:ktor-server-content-negotiation-jvm")
+    implementation("io.ktor:ktor-server-metrics-micrometer-jvm")
+    implementation("io.ktor:ktor-server-metrics-jvm")
+    implementation("io.ktor:ktor-server-call-logging-jvm")
+    implementation("io.ktor:ktor-server-call-id-jvm")
+    implementation("io.ktor:ktor-server-swagger-jvm")
+    implementation("io.ktor:ktor-server-openapi")
+    implementation("io.ktor:ktor-server-config-yaml:2.3.8")
+
     testImplementation(libs.bundles.test)
     testImplementation(libs.ktor.server.tests)
     testImplementation(libs.kotlin.test.junit)
+}
+repositories {
+    mavenCentral()
 }
 
 tasks.withType<Test> {

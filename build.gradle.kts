@@ -18,7 +18,10 @@ sonar {
         property(
             "sonar.kotlin.detekt.reportPaths",
             "${project(":server:app").layout.buildDirectory.get().asFile}/reports/detekt/detekt.xml, " +
-                    "${project(":server:api").layout.buildDirectory.get().asFile}/reports/detekt/detekt.xml"
+                    "${project(":server:api").layout.buildDirectory.get().asFile}/reports/detekt/detekt.xml" +
+                    "${project(":native").layout.buildDirectory.get().asFile}/reports/detekt/detekt.xml" +
+                    "${project(":shared").layout.buildDirectory.get().asFile}/reports/detekt/detekt.xml" +
+                    "${project(":composeApp").layout.buildDirectory.get().asFile}/reports/detekt/detekt.xml"
         )
         property(
             "sonar.coverage.jacoco.xmlReportPaths",

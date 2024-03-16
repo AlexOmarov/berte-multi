@@ -1,4 +1,14 @@
+@file:Suppress("UnstableApiUsage")
+
 rootProject.name = "berte-multi"
+
+include(":composeApp")
+include(":server")
+include(":server:app")
+include(":server:api")
+include(":shared")
+include(":native")
+
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -17,10 +27,3 @@ dependencyResolutionManagement {
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
-
-include(":composeApp")
-include(":server")
-include(":server:app")
-include(":server:api")
-include(":shared")
-include(":native")
