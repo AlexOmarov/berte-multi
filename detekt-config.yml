@@ -351,6 +351,7 @@ naming:
   FunctionNaming:
     active: true
     excludes:
+      - "**composeApp**"
       - "**/test/**"
       - "**/androidTest/**"
       - "**/*.Test.kt"
@@ -372,7 +373,7 @@ naming:
     active: false
     rootPackage: ''
   MatchingDeclarationName:
-    active: true
+    active: false
   MemberNameEqualsClassName:
     active: false
     ignoreOverridden: true

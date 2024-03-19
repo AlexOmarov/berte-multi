@@ -3,14 +3,14 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kover)
 }
 
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-       browser()
+        browser()
     }
-    
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -18,11 +18,8 @@ kotlin {
             }
         }
     }
-    
     mingwX64()
-
     jvm()
-    
     sourceSets {
         commonTest.dependencies {
             implementation(libs.kotlin.test)

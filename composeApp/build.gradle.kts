@@ -19,7 +19,6 @@ kotlin {
 
         binaries.executable()
     }
-    
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -27,12 +26,9 @@ kotlin {
             }
         }
     }
-    
     jvm("desktop")
-    
     sourceSets {
         val desktopMain by getting
-        
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
             implementation(libs.compose.ui.tooling)
@@ -81,9 +77,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    dependencies {
-
     }
 }
 

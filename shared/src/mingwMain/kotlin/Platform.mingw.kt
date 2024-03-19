@@ -1,4 +1,4 @@
-class MingwX64Platform: Platform {
+class MingwX64Platform : Platform {
     override val name: String = "MingwX64Platform"
 }
 

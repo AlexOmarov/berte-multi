@@ -4,8 +4,6 @@ rootProject.name = "berte-multi"
 
 include(":composeApp")
 include(":server")
-include(":server:app")
-include(":server:api")
 include(":shared")
 include(":native")
 
