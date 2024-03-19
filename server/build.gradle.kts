@@ -57,7 +57,10 @@ dependencies {
     implementation(libs.logback)
 
     testImplementation(libs.bundles.test)
-    testImplementation(libs.ktor.server.tests)
+    testImplementation(libs.kotlin.test.junit)
+    testImplementation(libs.junit.api)
+
+    testRuntimeOnly(libs.junit.engine)
 }
 
 tasks.withType<Test> {
