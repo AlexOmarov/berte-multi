@@ -18,7 +18,7 @@ testcontainers = "1.19.7"
 testcontainers-redis = "2.2.0"
 
 # Android
-agp = "8.3.0"
+agp = "8.3.1"
 androidx-activityCompose = "1.8.2"
 compose = "1.6.3"
 compose-plugin = "1.6.1"
@@ -40,12 +40,11 @@ logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 
-
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
 ktor-server-websockets = { module = "io.ktor:ktor-server-websockets-jvm", version.ref = "ktor" }
 ktor-server-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json-jvm", version.ref = "ktor" }
-ktor-server-micreometer = { module = "io.ktor:ktor-server-metrics-micrometer-jvm", version.ref = "ktor" }
+ktor-server-micrometer = { module = "io.ktor:ktor-server-metrics-micrometer-jvm", version.ref = "ktor" }
 ktor-server-metrics = { module = "io.ktor:ktor-server-metrics-jvm", version.ref = "ktor" }
 ktor-server-logging = { module = "io.ktor:ktor-server-call-logging-jvm", version.ref = "ktor" }
 ktor-server-tracing = { module = "io.ktor:ktor-server-call-id-jvm", version.ref = "ktor" }
@@ -71,13 +70,12 @@ testcontainers-postgres = { group = "org.testcontainers", name = "postgresql", v
 testcontainers-redis = { group = "com.redis", name = "testcontainers-redis", version.ref = "testcontainers-redis" }
 
 [bundles]
-
 ktor-server = [
     "ktor-server-core",
     "ktor-server-netty",
     "ktor-server-websockets",
     "ktor-server-serialization",
-    "ktor-server-micreometer",
+    "ktor-server-micrometer",
     "ktor-server-metrics",
     "ktor-server-logging",
     "ktor-server-tracing",

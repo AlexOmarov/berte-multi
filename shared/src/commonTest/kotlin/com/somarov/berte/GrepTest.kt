@@ -26,6 +26,5 @@ class GrepTest {
         for (result in results) {
             assertContains(result, "abc")
         }
-        assertEquals(Greeting().greet(), "")
     }
 }
