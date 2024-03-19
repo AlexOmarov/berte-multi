@@ -12,7 +12,7 @@ plugins {
     alias(libs.plugins.kover)
 }
 
-val exclusions = project.properties["test_exclusions"].toString()
+val exclusions = project.properties["testExclusions"].toString()
 val buildDir: String = project.layout.buildDirectory.get().asFile.path
 
 dependencies {

@@ -1,14 +1,12 @@
 plugins {
-    alias(libs.plugins.kotlinJvm)
+    alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.ktor)
     application
 }
 
-application {
-    mainClass.set("ru.somarov.berte.ApplicationKt")
+kotlin {
+    jvm()
 }
-
-val exclusions = project.properties["test_exclusions"].toString().replace("/", ".")
 
 dependencies {
     implementation(projects.shared)
@@ -22,6 +20,10 @@ dependencies {
     testImplementation(libs.junit.api)
 
     testRuntimeOnly(libs.junit.engine)
+}
+
+application {
+    mainClass.set("ru.somarov.berte.ApplicationKt")
 }
 
 tasks.withType<Test> {

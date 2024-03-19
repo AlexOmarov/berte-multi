@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
 }
 
+val defaultPackage = project.properties["defaultPackage"].toString()
+
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
@@ -46,7 +48,6 @@ kotlin {
             implementation(compose.desktop.currentOs)
         }
     }
-    androidTarget()
 }
 
 android {
@@ -58,7 +59,7 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "ru.somarov.berte"
+        applicationId = defaultPackage
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -86,7 +87,7 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "ru.somarov.berte"
+            packageName = defaultPackage
             packageVersion = "1.0.0"
         }
     }

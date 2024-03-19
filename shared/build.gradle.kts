@@ -4,12 +4,11 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
 }
+val defaultPackage = project.properties["defaultPackage"]
 
 kotlin {
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        browser()
-    }
+
+    @OptIn(ExperimentalWasmDsl::class) wasmJs { browser() }
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -19,6 +18,7 @@ kotlin {
     }
     mingwX64()
     jvm()
+
     sourceSets {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -27,9 +27,7 @@ kotlin {
 }
 
 android {
-    namespace = "ru.somarov.berte.shared"
+    namespace = "$defaultPackage.shared"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
-    }
+    defaultConfig { minSdk = libs.versions.android.minSdk.get().toInt() }
 }

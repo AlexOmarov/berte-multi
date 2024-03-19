@@ -8,7 +8,7 @@ RUN  apt-get update \
   && apt-get clean
 
 USER appuser
-COPY .build/app/libs/server.jar /server.jar
+COPY build/app/libs/server.jar /server.jar
 EXPOSE 8080 9010 9090 7000
 ENTRYPOINT ["java", \
     "-XX:+HeapDumpOnOutOfMemoryError", "-XX:HeapDumpPath=/var/dumps", \
