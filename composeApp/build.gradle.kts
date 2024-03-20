@@ -8,12 +8,26 @@ plugins {
 }
 
 val defaultPackage = project.properties["defaultPackage"].toString()
+val kk = project.projectDir.resolve("conf")
+println(kk)
 
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         moduleName = "composeApp"
         browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                    useConfigDirectory(
+                        project.projectDir
+                            .resolve("src")
+                            .resolve("wasmJsTest")
+                            .resolve("resources")
+                            .resolve("conf")
+                    )
+                }
+            }
             commonWebpackConfig {
                 outputFileName = "composeApp.js"
             }
