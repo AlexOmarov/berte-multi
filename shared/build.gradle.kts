@@ -20,6 +20,9 @@ kotlin {
     jvm()
 
     sourceSets {
+        commonMain.dependencies {
+            implementation(libs.kermit)
+        }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }

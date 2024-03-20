@@ -44,6 +44,9 @@ kotlin {
             implementation(compose.components.resources)
             implementation(projects.shared)
         }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+        }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
         }

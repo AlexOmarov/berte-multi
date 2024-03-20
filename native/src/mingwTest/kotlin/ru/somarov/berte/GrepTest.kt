@@ -1,4 +1,4 @@
-package com.somarov.berte
+package ru.somarov.berte
 
 import Greeting
 import kotlin.test.Test
@@ -16,7 +16,7 @@ class GrepTest {
     }
 
     @Test
-    fun shouldFindMatches() {
+    fun `Mingw should find matches`() {
         val results = mutableListOf<String>()
         Greeting().grep(sampleData, "[a-z]+") {
             results.add(it)

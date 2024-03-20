@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.ktor)
@@ -5,21 +7,26 @@ plugins {
 }
 
 kotlin {
-    jvm()
-}
+    jvm {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        mainRun {
+            mainClass.set("ru.somarov.berte.ApplicationKt")
+        }
+    }
+    sourceSets {
+        jvmMain.dependencies {
+            implementation(projects.shared)
+            implementation(libs.bundles.ktor.server)
+            implementation(libs.logback)
+        }
+        jvmTest.dependencies {
+            implementation(libs.bundles.test)
+            implementation(libs.kotlin.test.junit)
+            implementation(libs.junit.api)
 
-dependencies {
-    implementation(projects.shared)
-
-    implementation(libs.bundles.ktor.server)
-
-    implementation(libs.logback)
-
-    testImplementation(libs.bundles.test)
-    testImplementation(libs.kotlin.test.junit)
-    testImplementation(libs.junit.api)
-
-    testRuntimeOnly(libs.junit.engine)
+            runtimeOnly(libs.junit.engine)
+        }
+    }
 }
 
 application {
