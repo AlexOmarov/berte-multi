@@ -10,8 +10,18 @@ kotlin {
             }
         }
     }
+    linuxX64().apply {
+        binaries {
+            executable {
+                entryPoint = "main"
+            }
+        }
+    }
     sourceSets {
         mingwMain.dependencies {
+            implementation(projects.shared)
+        }
+        linuxMain.dependencies {
             implementation(projects.shared)
         }
     }

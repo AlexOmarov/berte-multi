@@ -17,6 +17,7 @@ kotlin {
         }
     }
     mingwX64()
+    linuxX64()
     jvm()
 
     sourceSets {

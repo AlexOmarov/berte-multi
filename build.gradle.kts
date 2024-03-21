@@ -19,7 +19,6 @@ dependencies {
     detektPlugins(libs.detekt.ktlint)
     kover(project(":shared"))
     kover(project(":server"))
-    kover(project(":native"))
     kover(project(":composeApp"))
 }
 
