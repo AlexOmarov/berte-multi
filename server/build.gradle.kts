@@ -3,7 +3,12 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.ktor)
+    alias(libs.plugins.kover)
     application
+}
+
+kover {
+    useJacoco()
 }
 
 kotlin {

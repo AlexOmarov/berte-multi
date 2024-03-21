@@ -4,8 +4,8 @@ plugins {
     alias(libs.plugins.androidLibrary) apply false
     alias(libs.plugins.jetbrainsCompose) apply false
     alias(libs.plugins.kotlinJvm) apply false
-    alias(libs.plugins.ktor) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
+    alias(libs.plugins.ktor) apply false
 
     alias(libs.plugins.detekt)
     alias(libs.plugins.sonarqube)
@@ -24,9 +24,9 @@ dependencies {
 }
 
 detekt {
-    config.setFrom(files("$rootDir/detekt-config.yml"))
-    reportsDir = file("${project.layout.buildDirectory.get().asFile.path}/reports/detekt")
+    config.from(files("$rootDir/detekt-config.yml"))
     source.from("shared", "native", "server", "composeApp")
+    reportsDir = file("$buildDir/reports/detekt")
 }
 
 kover {
@@ -42,7 +42,6 @@ koverReport {
     defaults {
         xml { onCheck = true }
         log { onCheck = true }
-        html { onCheck = true }
 
         verify {
             rule {

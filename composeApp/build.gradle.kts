@@ -8,8 +8,6 @@ plugins {
 }
 
 val defaultPackage = project.properties["defaultPackage"].toString()
-val kk = project.projectDir.resolve("conf")
-println(kk)
 
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
@@ -19,13 +17,7 @@ kotlin {
             testTask {
                 useKarma {
                     useChromeHeadless()
-                    useConfigDirectory(
-                        project.projectDir
-                            .resolve("src")
-                            .resolve("wasmJsTest")
-                            .resolve("resources")
-                            .resolve("conf")
-                    )
+                    useConfigDirectory(project.file("src/wasmJsTest/resources/conf"))
                 }
             }
             commonWebpackConfig {
@@ -50,6 +42,9 @@ kotlin {
             implementation(libs.compose.ui.tooling)
             implementation(libs.compose.ui.tooling.preview)
         }
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+        }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -60,9 +55,6 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-        }
-        desktopMain.dependencies {
-            implementation(compose.desktop.currentOs)
         }
     }
 }
@@ -85,11 +77,6 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
         }
     }
     compileOptions {
